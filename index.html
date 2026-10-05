@@ -1,0 +1,571 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competencia FICs — Skandia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E2C4B; --navy-2:#173D63; --navy-3:#27547F;
+  --green:#00A34A; --green-2:#41B75B; --green-soft:#E6F5EC;
+  --amber:#E08A2B; --amber-soft:#FBEEDC;
+  --ink:#122334; --ink-2:#44586B; --ink-3:#7D8FA0;
+  --line:#DCE4EB; --bg:#EDF1F5; --card:#fff;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:13px;line-height:1.45}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:'tnum'}
+.wrap{max-width:1380px;margin:0 auto;padding:14px}
+
+/* ---------- header ---------- */
+.hero{position:relative;overflow:hidden;border-radius:var(--radius);
+  background:linear-gradient(103deg,#0B2440 0%,#0E2C4B 38%,#1B4B79 72%,#24618F 100%);
+  color:#fff;padding:20px 24px 22px}
+.hero:after{content:"";position:absolute;inset:0;opacity:.20;
+  background:
+   radial-gradient(circle at 78% 18%, rgba(65,183,91,.55), transparent 42%),
+   repeating-linear-gradient(112deg, rgba(255,255,255,.06) 0 2px, transparent 2px 26px);
+  pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero h1{margin:0;font-size:23px;font-weight:600;letter-spacing:-.01em}
+.hero h1 span{display:block;color:var(--green-2);font-weight:600}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:700;letter-spacing:.06em}
+.brand:before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;
+  background:var(--green-2);margin-right:7px;transform:translateY(-2px)}
+.cut{background:#fff;color:var(--navy);border-radius:6px;padding:7px 12px;
+  font-size:12px;font-weight:600;display:inline-block}
+.conf{margin-top:11px;display:inline-block;font-size:14px;font-weight:700;letter-spacing:.02em;
+  color:#FFC24D;background:rgba(255,178,44,.14);border:1px solid rgba(255,194,77,.55);
+  border-radius:6px;padding:7px 13px}
+
+/* selector de fondo de referencia */
+.refs{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.ref{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#fff;
+  border-radius:8px;padding:9px 14px;font:inherit;text-align:left;cursor:pointer;min-width:210px}
+.ref b{display:block;font-size:13.5px;font-weight:600}
+.ref small{display:block;font-size:10.5px;color:#A9C3D9;margin-top:1px}
+.ref[aria-pressed=true]{background:#fff;color:var(--navy);border-color:#fff}
+.ref[aria-pressed=true] small{color:#2E7D52}
+.ref:hover{background:rgba(255,255,255,.2)}
+.ref[aria-pressed=true]:hover{background:#fff}
+
+/* ---------- panels ---------- */
+.panel{background:var(--card);border-radius:var(--radius);box-shadow:0 1px 2px rgba(16,44,75,.10);
+  overflow:hidden;margin-top:12px}
+.ph{display:flex;align-items:center;gap:9px;padding:9px 14px;background:var(--green-soft);
+  border-bottom:1px solid #CFE8D9}
+.ph h2{margin:0;font-size:12.5px;font-weight:600;color:#0C6B38}
+.ph .ic{width:22px;height:22px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#fff}
+.pb{padding:14px}
+
+/* ---------- controles ---------- */
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;
+  background:var(--card);border-radius:var(--radius);padding:10px 12px;box-shadow:0 1px 2px rgba(16,44,75,.10)}
+input[type=search],select{font:inherit;font-size:12.5px;color:var(--ink);background:#F6F8FA;
+  border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+input[type=search]{min-width:200px;flex:1}
+input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-visible{outline:2px solid var(--navy-3);outline-offset:1px}
+.seg{display:flex;background:#F6F8FA;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-size:12px;font-weight:500;border:0;background:transparent;color:var(--ink-2);
+  padding:7px 11px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--navy);color:#fff}
+.chk{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);cursor:pointer;
+  padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:#F6F8FA}
+.chk input{accent-color:var(--green)}
+.ghost{font:inherit;font-size:12px;font-weight:500;background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:7px 11px;cursor:pointer;color:var(--navy-2)}
+.ghost:hover{background:#F3F7FA}
+
+/* ---------- tabla ---------- */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:1000px}
+thead th{background:var(--navy);color:#fff;font-size:10.5px;font-weight:600;letter-spacing:.02em;
+  padding:9px 10px;text-align:right;white-space:nowrap;position:sticky;top:0;cursor:pointer;user-select:none}
+thead th:first-child,thead th:nth-child(2){text-align:left}
+tbody td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td:first-child,tbody td:nth-child(2){text-align:left;white-space:normal}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:#F4F8FB}
+tbody tr.base{background:var(--green-soft)}
+tbody tr.base:hover{background:#D9EFE3}
+.fname{font-weight:600;color:var(--navy);font-size:12.5px}
+.fsub{font-size:10.5px;color:var(--ink-3)}
+.muted{color:var(--ink-2);font-size:11.5px}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:3px 9px;font-size:11px;font-weight:600}
+.pill.si{background:var(--green-soft);color:#0C6B38}
+.pill.no{background:var(--amber-soft);color:#98550B}
+.pill.td{background:#EEF2F6;color:#5A6C7D}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.why{font-size:11px;color:var(--ink-2);max-width:260px;display:block;margin-top:3px;white-space:normal}
+
+/* ---------- panel lateral ---------- */
+.scrim{position:fixed;inset:0;background:rgba(14,44,75,.45);opacity:0;pointer-events:none;transition:opacity .18s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:#fff;
+  transform:translateX(100%);transition:transform .22s ease;display:flex;flex-direction:column;z-index:5}
+.drawer.on{transform:none}
+@media(prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}}
+.dh{background:var(--navy);color:#fff;padding:16px 18px;position:relative}
+.dh h3{margin:0 0 2px;font-size:17px;font-weight:600}
+.dh p{margin:0;font-size:11.5px;color:#A9C3D9}
+.dc{padding:16px 18px;overflow-y:auto;flex:1}
+.verdict{border-radius:var(--radius);padding:13px 15px;margin-bottom:14px}
+.verdict.si{background:var(--green-soft);border-left:4px solid var(--green)}
+.verdict.no{background:var(--amber-soft);border-left:4px solid var(--amber)}
+.verdict.td{background:#EEF2F6;border-left:4px solid #93A5B5}
+.verdict h4{margin:0 0 6px;font-size:13.5px}
+.verdict p{margin:0;font-size:12.5px;color:#2B3B49;line-height:1.55}
+.verdict ul{margin:0;padding-left:17px;font-size:12.5px;color:#2B3B49;line-height:1.55}
+.verdict li{margin-bottom:7px}
+.verdict li:last-child{margin-bottom:0}
+.sec{font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.05em;margin:18px 0 8px}
+.cmp{width:100%;border-collapse:collapse;min-width:0}
+.cmp th{background:#F1F5F8;color:var(--ink-2);font-size:10.5px;font-weight:600;padding:6px 8px;text-align:right;position:static}
+.cmp th:first-child{text-align:left}
+.cmp td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line);font-size:12px}
+.cmp td:first-child{text-align:left;color:var(--ink-2)}
+.up{color:#0C6B38;font-weight:600} .dn{color:#B4471F;font-weight:600}
+textarea{width:100%;min-height:120px;font:inherit;font-size:12.5px;line-height:1.55;padding:10px;
+  border:1px solid var(--line);border-radius:6px;resize:vertical;background:#FAFCFD}
+.row{display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap}
+.primary{font:inherit;font-size:12.5px;font-weight:600;background:var(--green);color:#fff;border:0;
+  border-radius:6px;padding:8px 14px;cursor:pointer}
+.primary:hover{background:#00913F}
+.saved{font-size:11.5px;color:var(--green);opacity:0;transition:opacity .2s}
+.saved.on{opacity:1}
+.x{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.15);border:0;color:#fff;
+  width:28px;height:28px;border-radius:6px;font-size:16px;cursor:pointer;line-height:1}
+.foot{color:var(--ink-3);font-size:11px;text-align:center;padding:16px 8px 6px}
+svg text{font-family:'Inter',sans-serif}
+
+/* ---------- pantalla de ingreso ---------- */
+body.bloqueado .wrap{display:none}
+#acceso{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;
+  background:linear-gradient(103deg,#0B2440 0%,#0E2C4B 38%,#1B4B79 72%,#24618F 100%)}
+#acceso:after{content:"";position:absolute;inset:0;opacity:.20;pointer-events:none;
+  background:radial-gradient(circle at 78% 18%, rgba(65,183,91,.55), transparent 42%),
+   repeating-linear-gradient(112deg, rgba(255,255,255,.06) 0 2px, transparent 2px 26px)}
+.caja{position:relative;z-index:1;background:#fff;border-radius:12px;padding:28px 30px;
+  width:min(420px,100%);box-shadow:0 18px 50px rgba(5,20,38,.45)}
+.caja .brand{color:var(--navy);font-size:19px;margin-bottom:18px}
+.caja h2{margin:0;font-size:20px;font-weight:600;color:var(--navy)}
+.caja .sub{margin:2px 0 18px;font-size:12.5px;color:var(--ink-2)}
+.caja label{display:block;font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:5px}
+.caja input{width:100%;font:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line);
+  border-radius:6px;background:#FAFCFD;color:var(--ink)}
+.caja button{width:100%;margin-top:12px;font:inherit;font-size:14px;font-weight:600;color:#fff;
+  background:var(--green);border:0;border-radius:6px;padding:11px;cursor:pointer}
+.caja button:hover{background:#00913F}
+.caja button[disabled]{background:#9BC7AC;cursor:default}
+#accesoError{margin:11px 0 0;font-size:12.5px;color:#B4471F;min-height:17px}
+.aviso{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);
+  font-size:12px;font-weight:600;color:#9A6210;background:#FBEEDC;border-radius:6px;
+  padding:9px 11px;border-top:0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink-2);margin-top:8px}
+.legend i{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:5px}
+</style>
+
+<div id="acceso">
+  <div class="caja">
+    <div class="brand">skandia</div>
+    <h2>Competencia FICs</h2>
+    <p class="sub">Acceso restringido. Ingresa tu correo corporativo para continuar.</p>
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" autocomplete="off" spellcheck="false" placeholder="nombre@empresa.com">
+    <button id="entrar">Ingresar</button>
+    <p id="accesoError" role="alert"></p>
+    <p class="aviso">Información confidencial para uso interno</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-top">
+      <div>
+        <h1>Competencia FICs<span>Rentabilidad y comparabilidad</span></h1>
+      </div>
+      <div style="text-align:right">
+        <div class="brand">skandia</div>
+        <div style="margin-top:10px"><span class="cut" id="corte">Corte 31/08/2026</span></div>
+        <div class="conf">Información confidencial para uso interno</div>
+      </div>
+    </div>
+    <div class="refs" id="refs" role="group" aria-label="Fondo de referencia"></div>
+  </header>
+
+  <div class="bar">
+    <input type="search" id="q" placeholder="Buscar fondo, administrador o gestor">
+    <select id="fAdmin"></select>
+    <div class="seg" id="segPer" role="group" aria-label="Periodo">
+      <button data-p="1m">1 mes</button>
+      <button data-p="6m">6 meses</button>
+      <button data-p="ytd">Año corrido</button>
+      <button data-p="1a" aria-pressed="true">1 año</button>
+    </div>
+    <label class="chk"><input type="checkbox" id="onlyComp"> Solo comparables</label>
+    <button class="ghost" id="csv">Descargar CSV</button>
+  </div>
+
+  <section class="panel">
+    <div class="ph"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h2 id="rankTitle">Rentabilidad por fondo</h2></div>
+    <div class="pb"><div id="rank"></div>
+      <div class="legend">
+        <span><i style="background:#00A34A"></i>Fondo de referencia</span>
+        <span><i style="background:#17375E"></i>Comparable</span>
+        <span><i style="background:#C6D2DC"></i>No comparable o por definir</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="ph"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><h2>Detalle de fondos <span id="count" style="font-weight:400;color:#2E7D52"></span></h2></div>
+    <div class="tw"><table id="tbl">
+      <thead><tr>
+        <th data-k="fondo">Fondo</th>
+        <th data-k="admin">Administrador / Gestor</th>
+        <th data-k="valor">Valor fondo<br>(Mill COP)</th>
+        <th data-k="r1m">Rent. 1 mes</th>
+        <th data-k="r6m">Rent. 6 meses</th>
+        <th data-k="rytd">Rent. año corrido</th>
+        <th data-k="r1a">Rent. 1 año</th>
+        <th data-k="v1m">Vol. 1 mes</th>
+        <th data-k="v6m">Vol. 6 meses</th>
+        <th data-k="vytd">Vol. año corrido</th>
+        <th data-k="v1a">Vol. 1 año</th>
+        <th data-k="comparable" id="thComp">Comparable</th>
+      </tr></thead>
+      <tbody id="tb"></tbody>
+    </table></div>
+  </section>
+
+  <p class="foot">Fuente: Consolidado FIC con corte al 31/08/2026 y lista de comparables. Las rentabilidades son efectivas anuales según ficha técnica de cada fondo.</p>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="Detalle del fondo">
+  <div class="dh">
+    <button class="x" id="close" aria-label="Cerrar">×</button>
+    <h3 id="dName"></h3><p id="dMeta"></p>
+  </div>
+  <div class="dc" id="dBody"></div>
+</aside>
+
+<script>
+/* Correos autorizados. No se guarda el correo, solo su huella digital (SHA-256
+   con sal y repeticiones), así que la lista no se puede leer desde este archivo. */
+const ACCESO = {"sal":"8a6b758620878ad9","vueltas":6000,"huellas":["53a3c7d4ff51510a142aedb0a8647a8a873a6907baf4c3fbde7baed51b3b38e7","63a7230b39f2e0702cd04a9bac8b05250a31bf8a03ae1f7a13a59e96d5acd872","638f300734d3f351ac61ae094c41af160f00b66255e26a98e0400d2eb342d91a","7c2fdb345838db333bae98aae56c140b2d2dabe464d72956ace14addc190b60c","30d07cfaadb9d902403c27a090d3c3f9f672157235327387758ed217ba7cb5a2","a36ccf6b0afe9bacebfa4c8a5779822981f42ae30ef09a707de5c7393fe7aabd","359ac5511e9aaec93071c579e2d6a89d6733df1797a2c7e5ad458b4c632cc7a7","b96f08710b7e8a82fe43164d078bd9f215a44834484548978cc03798fa188c5c","3c2c70dfb06aa4c7ac350dafe3d734927af4077af7c23306317e4cb75ac629b8","1a30f80cbeb544bacbb98cdf87731643f784407f72269b34c07a2d6206eef911","d6b13398f7e1ba5d263cd738322d92d34070a5bbaedf21430dfd93581707bb4a"]};
+
+/* SHA-256 en JavaScript puro (no depende de crypto.subtle, funciona abriendo el
+   archivo desde una carpeta de red). Devuelve el resultado en hexadecimal. */
+function sha256hex(msg) {
+  const K = [
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
+  let H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+
+  // texto -> bytes UTF-8
+  const bytes = [];
+  for (const ch of String(msg)) {
+    let c = ch.codePointAt(0);
+    if (c < 0x80) bytes.push(c);
+    else if (c < 0x800) bytes.push(0xc0 | c >> 6, 0x80 | c & 63);
+    else if (c < 0x10000) bytes.push(0xe0 | c >> 12, 0x80 | (c >> 6) & 63, 0x80 | c & 63);
+    else bytes.push(0xf0 | c >> 18, 0x80 | (c >> 12) & 63, 0x80 | (c >> 6) & 63, 0x80 | c & 63);
+  }
+  const bits = bytes.length * 8;
+  bytes.push(0x80);
+  while (bytes.length % 64 !== 56) bytes.push(0);
+  for (let i = 7; i >= 0; i--) bytes.push(Math.floor(bits / Math.pow(2, i * 8)) & 0xff);
+
+  const w = new Uint32Array(64);
+  const rotr = (x, n) => (x >>> n) | (x << (32 - n));
+  for (let p = 0; p < bytes.length; p += 64) {
+    for (let i = 0; i < 16; i++)
+      w[i] = (bytes[p + i * 4] << 24) | (bytes[p + i * 4 + 1] << 16) | (bytes[p + i * 4 + 2] << 8) | bytes[p + i * 4 + 3];
+    for (let i = 16; i < 64; i++) {
+      const s0 = rotr(w[i - 15], 7) ^ rotr(w[i - 15], 18) ^ (w[i - 15] >>> 3);
+      const s1 = rotr(w[i - 2], 17) ^ rotr(w[i - 2], 19) ^ (w[i - 2] >>> 10);
+      w[i] = (w[i - 16] + s0 + w[i - 7] + s1) >>> 0;
+    }
+    let [a, b, c, d, e, f, g, h] = H;
+    for (let i = 0; i < 64; i++) {
+      const S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
+      const t1 = (h + S1 + ((e & f) ^ (~e & g)) + K[i] + w[i]) >>> 0;
+      const S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
+      const t2 = (S0 + ((a & b) ^ (a & c) ^ (b & c))) >>> 0;
+      h = g; g = f; f = e; e = (d + t1) >>> 0;
+      d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+    }
+    H = [H[0] + a, H[1] + b, H[2] + c, H[3] + d, H[4] + e, H[5] + f, H[6] + g, H[7] + h].map(x => x >>> 0);
+  }
+  return H.map(x => x.toString(16).padStart(8, '0')).join('');
+}
+
+
+function huella(texto) {
+  let h = sha256hex(ACCESO.sal + '|' + texto);
+  for (let i = 0; i < ACCESO.vueltas; i++) h = sha256hex(ACCESO.sal + '|' + h);
+  return h;
+}
+
+function validarCorreo() {
+  const campo = document.getElementById('correo');
+  const boton = document.getElementById('entrar');
+  const error = document.getElementById('accesoError');
+  const correo = campo.value.trim().toLowerCase();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) {
+    error.textContent = 'Escribe un correo electrónico válido.';
+    return;
+  }
+  error.textContent = '';
+  boton.disabled = true;
+  boton.textContent = 'Validando…';
+  // el tiempo de espera deja que el botón se pinte antes del cálculo
+  setTimeout(() => {
+    const dominio = correo.slice(correo.indexOf('@'));
+    const ok = ACCESO.huellas.includes(huella(correo)) || ACCESO.huellas.includes(huella(dominio));
+    if (!ok) {
+      boton.disabled = false;
+      boton.textContent = 'Ingresar';
+      error.textContent = 'Este correo no está autorizado para consultar la herramienta.';
+      campo.select();
+      return;
+    }
+    document.getElementById('acceso').remove();
+    document.body.classList.remove('bloqueado');
+    iniciarApp();
+  }, 30);
+}
+
+document.body.classList.add('bloqueado');
+document.getElementById('entrar').onclick = validarCorreo;
+document.getElementById('correo').onkeydown = e => {
+  if (e.key === 'Enter') validarCorreo();
+  else document.getElementById('accesoError').textContent = '';
+};
+document.getElementById('correo').focus();
+
+const FONDOS = [{"fondo":"FIC Skandia Efectivo","participacion":"Tipo D - 503","admin":"Skandia Fiduciaria S.A.","corte":"31/08/2026","valor":1551740.73,"administracion":0.015,"r1m":0.11428,"r6m":0.11334,"rytd":0.10187,"r1a":0.08772,"v1m":0.00159,"v6m":0.00307,"vytd":0.00364,"v1a":0.00384,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"BBVA Efectivo","participacion":"Clase A - 501","admin":"BBVA Asset Management S.A. Sociedad Fiduciaria","corte":"31/08/2026","valor":5891077.57,"administracion":0.0165,"r1m":0.10502,"r6m":0.09856,"rytd":0.09126,"r1a":0.08217,"v1m":0.00075,"v6m":0.00105,"vytd":0.00128,"v1a":0.00137,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Credicorp Capital Alta Liquidez","participacion":"A","admin":"Credicorp Capital Colombia S.A.","corte":"31/08/2026","valor":6946819.55,"administracion":0.015,"r1m":0.10694,"r6m":0.10257,"rytd":0.09488,"r1a":0.08563,"v1m":0.00102,"v6m":0.00153,"vytd":0.0017,"v1a":0.00166,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Credicorp Capital Vista","participacion":"A","admin":"Credicorp Capital Colombia S.A.","corte":"31/08/2026","valor":1180298.87,"administracion":0.019,"r1m":0.11406,"r6m":0.10747,"rytd":0.09441,"r1a":0.08248,"v1m":0.00175,"v6m":0.00267,"vytd":0.00304,"v1a":0.003,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Avanzar Vista","participacion":"T.P. 3 No asociado a Coomeva 1","admin":"Fiduciaria Coomeva S.A.","corte":"31/08/2026","valor":260472.69,"administracion":0.015,"r1m":0.11717,"r6m":0.10563,"rytd":0.09018,"r1a":0.07937,"v1m":0.0027,"v6m":0.0027,"vytd":0.0035,"v1a":0.0034,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto BTG Pactual Liquidez","participacion":"Clase A","admin":"BTG Pactual S.A. Comisionista de Bolsa","corte":"31/08/2026","valor":4780528.93,"administracion":0.015,"r1m":0.12175,"r6m":0.11618,"rytd":0.10356,"r1a":0.08961,"v1m":0.00207,"v6m":0.00257,"vytd":0.00277,"v1a":0.00291,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Efectivo a la Vista","participacion":"Part. 6 - Tradicional","admin":"Fiduciaria La Previsora S.A.","corte":"31/08/2026","valor":1322068.14,"administracion":0.016,"r1m":0.11019,"r6m":0.10644,"rytd":0.09222,"r1a":0.08218,"v1m":0.0013,"v6m":0.0016,"vytd":0.0021,"v1a":0.0023,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Fidugob","participacion":"TP 1 - Inversionista I","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":5810236.55,"administracion":0.014,"r1m":0.11878,"r6m":0.11371,"rytd":0.09544,"r1a":0.08442,"v1m":0.00199,"v6m":0.00236,"vytd":0.0032,"v1a":0.00344,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Fidugob permite inversiones con vencimientos de hasta 15 años, frente a un máximo de 2 años en FIC Efectivo. Fidugob puede invertir hasta un 20% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Occirenta","participacion":"Tipo 8. NEG FID II - 508","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":3665194.2,"administracion":0.015,"r1m":0.11948,"r6m":0.11447,"rytd":0.09453,"r1a":0.08266,"v1m":0.00186,"v6m":0.00239,"vytd":0.00352,"v1a":0.00387,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Occirenta permite invertir en instrumentos con vencimientos de hasta 30 años, frente al máximo de 2 años establecido para FIC Efectivo. FIC Occirenta contempla una duración promedio de hasta 5 años, significativamente superior al 1 año de FIC Efectivo. FIC Occirenta puede invertir hasta un 10% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Rendir","participacion":"Único","admin":"DAVIbank Fiduciaria S.A.","corte":"31/07/2026","valor":436977.8,"administracion":0.017,"r1m":0.10649,"r6m":0.10081,"rytd":0.09012,"r1a":0.07818,"v1m":0.00229,"v6m":0.00388,"vytd":0.00389,"v1a":0.00383,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Sumar","participacion":"TP 9 - Admon III","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":6371449.81,"administracion":0.014,"r1m":0.11713,"r6m":0.11511,"rytd":0.09786,"r1a":0.08635,"v1m":0.002,"v6m":0.00227,"vytd":0.00305,"v1a":0.00326,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Sumar permite invertir en instrumentos con vencimientos de hasta 15 años, frente al máximo de 2 años establecido para FIC Efectivo. FIC Sumar puede mantener hasta un 20% en participaciones de otros FIC, mientras que FIC Efectivo no contempla inversiones en otros fondos."},{"fondo":"FIC Abierto Superior","participacion":"Tipo de participación S2","admin":"Fiduciaria Davivienda S.A.","corte":"31/08/2026","valor":8841193.4,"administracion":0.015,"r1m":0.1118,"r6m":0.11016,"rytd":0.10053,"r1a":0.08494,"v1m":0.00144,"v6m":0.00235,"vytd":0.00331,"v1a":0.00378,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"FIC Superior puede invertir hasta un 30% en renta variable, mientras que FIC Efectivo concentra sus inversiones exclusivamente en renta fija. FIC Superior permite hasta un 40% de las inversiones en moneda extranjera y hasta un 20% en participaciones de FIC extranjeros; en FIC Efectivo, la exposición en moneda extranjera está limitada al 20% y no se permiten inversiones en otros FIC. FIC Superior establece un plazo promedio ponderado máximo 1.5 años, en FIC Efectivo es máximo 1 año."},{"fondo":"FIC Interés","participacion":"Participación A (501)","admin":"Davivienda Corredores S.A.","corte":"31/08/2026","valor":4004689.85,"administracion":0.018,"r1m":0.10856,"r6m":0.10019,"rytd":0.09054,"r1a":0.08031,"v1m":0.00153,"v6m":0.00225,"vytd":0.00249,"v1a":0.00241,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"FIC Valor Plus","participacion":"TP2 - 506","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":1952667.79,"administracion":0.015,"r1m":0.11997,"r6m":0.11439,"rytd":0.09746,"r1a":0.08464,"v1m":0.00205,"v6m":0.00224,"vytd":0.00296,"v1a":0.00324,"ref":"FIC Skandia Efectivo","comparable":"SI","argumento":""},{"fondo":"Fiducuenta","participacion":"Tipo C","admin":"Fiduciaria Bancolombia S.A.","corte":"31/08/2026","valor":25357358.57,"administracion":0.0151,"r1m":0.12493,"r6m":0.11602,"rytd":0.10412,"r1a":0.08759,"v1m":0.00244,"v6m":0.00271,"vytd":0.00354,"v1a":0.00401,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"Fiducuenta puede invertir hasta un 30% en ETF y otros FIC, mientras que FIC Efectivo no contempla este tipo de activos. Fiducuenta puede utilizar instrumentos derivados con fines de inversión hasta por el 40% del portafolio, FIC Efectivo solo puede hacer derivados con fines de cobertura. Fiducuenta permite inversiones de hasta 7 años, con un plazo promedio ponderado de hasta 2 años, frente a los 2 años y 1 año, respectivamente, de FIC Efectivo"},{"fondo":"Fondo Abierto Alianza","participacion":"Corporativos B","admin":"Alianza Fiduciaria S.A.","corte":"31/08/2026","valor":9311842.01,"administracion":0.0127,"r1m":0.12381,"r6m":0.11603,"rytd":0.10281,"r1a":0.08958,"v1m":0.00161,"v6m":0.00247,"vytd":0.00294,"v1a":0.00292,"ref":"FIC Skandia Efectivo","comparable":"NO","argumento":"Fondo Abierto Alianza puede invertir hasta un 5% en ETF de largo plazo y hasta un 20% en FIC de renta fija local; FIC Efectivo no contempla estas alternativas de inversión. FIC Abierto permite inversiones con vencimientos de hasta 30 años, en FIC Efectivo, el plazo máximo de inversión es de 2 años. FIC Abierto Alianza establece un plazo promedio ponderado máximo de 3 años, frente a 1 año en FIC Efectivo."},{"fondo":"FIC Skandia Multiplazo","participacion":"Tipo D3 - 533","admin":"Skandia Fiduciaria S.A.","corte":"31/08/2026","valor":82893.08,"administracion":0.014,"r1m":0.12882,"r6m":0.13843,"rytd":0.10463,"r1a":0.08286,"v1m":0.00685,"v6m":0.00936,"vytd":0.00995,"v1a":0.01051,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"BBVA Plazo 30","participacion":"Clase A - 801","admin":"BBVA Asset Management S.A. Sociedad Fiduciaria","corte":"31/08/2026","valor":48074.41,"administracion":0.015,"r1m":0.13231,"r6m":0.12575,"rytd":0.10048,"r1a":0.07776,"v1m":0.00685,"v6m":0.00696,"vytd":0.00757,"v1a":0.00875,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Altarenta","participacion":"TP 1 - Inversionista I","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":91206.63,"administracion":0.015,"r1m":0.13435,"r6m":0.13926,"rytd":0.09329,"r1a":0.08053,"v1m":0.00395,"v6m":0.006,"vytd":0.01057,"v1a":0.01067,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Abierto Rentar","participacion":"TP Otros Inversionistas - 535","admin":"Aval Fiduciaria S.A.","corte":"31/08/2026","valor":407319.82,"administracion":0.015,"r1m":0.11459,"r6m":0.10951,"rytd":0.09326,"r1a":0.08263,"v1m":0.00188,"v6m":0.00207,"vytd":0.00272,"v1a":0.00285,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""},{"fondo":"FIC Renta Fija Mediano Plazo - Multiescala","participacion":"Participación A (501)","admin":"Davivienda Corredores S.A.","corte":"31/08/2026","valor":258540.38,"administracion":0.015,"r1m":0.12872,"r6m":0.16735,"rytd":0.11942,"r1a":0.08594,"v1m":0.00921,"v6m":0.02124,"vytd":0.02036,"v1a":0.01905,"ref":"FIC Skandia Multiplazo","comparable":"SI","argumento":""}];
+/* ============ estado ============ */
+const REFS = [...new Set(FONDOS.map(d => d.ref))];   // fondos de referencia, salen del archivo
+let grupo = REFS[0], per = '1a', sortK = 'r1a', sortDir = -1;
+
+const f = {
+  pct: v => v == null ? '—' : (v * 100).toFixed(2).replace('.', ',') + '%',
+  pct1: v => v == null ? '—' : (v * 100).toFixed(1).replace('.', ',') + '%',
+  mill: v => v == null ? '—' : v.toLocaleString('es-CO', { maximumFractionDigits: 0 }),
+  dias: v => v == null ? '—' : v.toLocaleString('es-CO', { maximumFractionDigits: 0 }) + ' días',
+  bps: v => (v >= 0 ? '+' : '−') + Math.abs(v * 10000).toFixed(0) + ' pb'
+};
+const all = () => FONDOS;
+const groupOf = g => all().filter(d => d.ref === g);
+const baseName = () => grupo;
+const base = () => all().find(d => d.fondo === baseName());
+const rKey = p => 'r' + p, vKey = p => 'v' + p;
+// parte el argumento en viñetas: corta en cada punto seguido de espacio
+const vinetas = t => {
+  const partes = String(t).split(/(?<=\.)\s+/).map(x => x.trim()).filter(Boolean)
+    .map(x => /[.!?]$/.test(x) ? x : x + '.');
+  return partes.length < 2 ? `<p>${partes[0] || t}</p>`
+    : '<ul>' + partes.map(x => `<li>${x}</li>`).join('') + '</ul>';
+};
+const perLabel = { '1m': 'último mes', '6m': 'últimos 6 meses', 'ytd': 'año corrido', '1a': 'último año' };
+
+/* ============ filtros ============ */
+function filtered() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const a = document.getElementById('fAdmin').value;
+  const only = document.getElementById('onlyComp').checked;
+  return groupOf(grupo).filter(d => {
+    if (q && !(d.fondo + ' ' + d.admin).toLowerCase().includes(q)) return false;
+    if (a && d.admin !== a) return false;
+    if (only && d.comparable !== 'SI') return false;
+    return true;
+  });
+}
+const colorOf = d => d.fondo === baseName() ? '#00A34A' : d.comparable === 'SI' ? '#17375E' : '#C6D2DC';
+
+/* ============ gráfico de barras ============ */
+function rank() {
+  const rows = filtered().slice().sort((a, b) => (b[rKey(per)] || 0) - (a[rKey(per)] || 0));
+  document.getElementById('rankTitle').textContent =
+    'Rentabilidad ' + perLabel[per] + ' — fondos comparados con ' + baseName();
+  const box = document.getElementById('rank');
+  if (!rows.length) { box.innerHTML = '<p class="muted">Ningún fondo cumple los filtros. Ajusta la búsqueda para ver resultados.</p>'; return; }
+  const h = 24, pad = 240, w = 900, max = Math.max(...rows.map(d => d[rKey(per)] || 0)) * 1.1;
+  const bt = base()[rKey(per)];
+  const bars = rows.map((d, i) => {
+    const v = d[rKey(per)] || 0, bw = Math.max(2, (v / max) * (w - pad - 64));
+    const nm = d.fondo.length > 36 ? d.fondo.slice(0, 35) + '…' : d.fondo;
+    return `<g><title>${d.fondo} — ${f.pct(v)}</title>
+      <text x="${pad - 8}" y="${i * h + 16}" text-anchor="end" font-size="11" fill="#44586B">${nm}</text>
+      <rect x="${pad}" y="${i * h + 5}" width="${bw}" height="15" rx="2" fill="${colorOf(d)}"></rect>
+      <text x="${pad + bw + 7}" y="${i * h + 16}" font-size="11" fill="#122334" font-weight="600">${f.pct(v)}</text></g>`;
+  }).join('');
+  const bx = pad + (bt / max) * (w - pad - 64);
+  box.innerHTML = `<svg viewBox="0 0 ${w} ${rows.length * h + 10}" width="100%" role="img" aria-label="Rentabilidad por fondo">
+      <line x1="${bx}" y1="0" x2="${bx}" y2="${rows.length * h}" stroke="#00A34A" stroke-width="1" stroke-dasharray="3 3" opacity=".6"></line>
+      ${bars}</svg>`;
+}
+
+/* ============ tabla ============ */
+function table() {
+  const rows = filtered().slice().sort((a, b) => {
+    const x = a[sortK], y = b[sortK];
+    if (typeof x === 'number' && typeof y === 'number') return (x - y) * sortDir;
+    return String(x).localeCompare(String(y), 'es') * sortDir;
+  });
+  document.getElementById('thComp').textContent = 'Comparable con ' + baseName();
+  document.getElementById('count').textContent = '· ' + rows.length + ' de ' + groupOf(grupo).length;
+  document.getElementById('tb').innerHTML = rows.map(d => {
+    const isB = d.fondo === baseName();
+    const st = isB ? 'si' : d.comparable === 'SI' ? 'si' : d.comparable === 'NO' ? 'no' : 'td';
+    const lb = isB ? 'Referencia' : d.comparable === 'SI' ? 'Sí' : d.comparable === 'NO' ? 'No' : 'Por definir';
+    const why = isB ? 'Fondo de referencia de este grupo'
+      : d.argumento ? d.argumento
+        : d.comparable === 'SI' ? 'Cumple los criterios de comparación'
+          : 'Sin argumento registrado en la lista de comparables.';
+    return `<tr data-f="${encodeURIComponent(d.fondo)}" ${isB ? 'class="base"' : ''}>
+      <td><span class="fname">${d.fondo}</span></td>
+      <td class="muted">${d.admin}</td>
+      <td class="num">${f.mill(d.valor)}</td>
+      <td class="num">${f.pct(d.r1m)}</td><td class="num">${f.pct(d.r6m)}</td>
+      <td class="num">${f.pct(d.rytd)}</td><td class="num">${f.pct(d.r1a)}</td>
+      <td class="num muted">${f.pct(d.v1m)}</td><td class="num muted">${f.pct(d.v6m)}</td>
+      <td class="num muted">${f.pct(d.vytd)}</td><td class="num muted">${f.pct(d.v1a)}</td>
+      <td style="text-align:left"><span class="pill ${st}"><i class="dot"></i>${lb}</span>
+        <span class="why">${why.length > 130 ? why.slice(0, 129) + '…' : why}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+/* ============ panel de detalle ============ */
+function openFund(name) {
+  const d = all().find(x => x.fondo === name), b = base();
+  const isB = d.fondo === baseName();
+  const st = isB ? 'si' : d.comparable === 'SI' ? 'si' : d.comparable === 'NO' ? 'no' : 'td';
+  document.getElementById('dName').textContent = d.fondo;
+  document.getElementById('dMeta').textContent = `${d.admin} · Grupo ${d.ref}`;
+
+  const row = (lb, v, bv, fmt, inv) => {
+    const dd = (v == null || bv == null || isB) ? null : v - bv;
+    const cls = dd == null ? '' : (inv ? (dd <= 0 ? 'up' : 'dn') : (dd >= 0 ? 'up' : 'dn'));
+    const txt = dd == null ? '—' : (fmt === 'pct' ? f.bps(dd) : (dd >= 0 ? '+' : '−') + f.mill(Math.abs(dd)));
+    return `<tr><td>${lb}</td><td class="num">${fmt === 'pct' ? f.pct(v) : f.mill(v)}</td>
+      <td class="num muted">${fmt === 'pct' ? f.pct(bv) : f.mill(bv)}</td><td class="num ${cls}">${txt}</td></tr>`;
+  };
+
+  const head = isB ? 'Fondo de referencia de este grupo'
+    : d.comparable === 'SI' ? `Comparable con ${baseName()}`
+      : d.comparable === 'NO' ? `No comparable con ${baseName()}`
+        : `Comparabilidad por definir frente a ${baseName()}`;
+  const txt = isB ? 'Los demás fondos de este grupo se evalúan frente a él.'
+    : d.argumento || (d.comparable === 'SI'
+      ? 'Perfil de plazo, liquidez y riesgo alineados con el fondo de referencia, por lo que comparar rentabilidades es válido.'
+      : 'Sin argumento registrado en la lista de comparables.');
+
+  document.getElementById('dBody').innerHTML = `
+    <div class="verdict ${st}"><h4>${head}</h4>${vinetas(txt)}</div>
+
+    <div class="sec">Participación y comisión</div>
+    <table class="cmp"><thead><tr><th>Concepto</th><th>${isB ? 'Valor' : 'Este fondo'}</th><th>${baseName()}</th></tr></thead><tbody>
+      <tr><td>Participación</td><td class="num" style="font-weight:600">${d.participacion || 'Única'}</td>
+        <td class="num muted">${isB ? '—' : (b.participacion || 'Única')}</td></tr>
+      <tr><td>Comisión de administración</td><td class="num" style="font-weight:600">${f.pct(d.administracion)}</td>
+        <td class="num muted">${isB ? '—' : f.pct(b.administracion)}</td></tr>
+    </tbody></table>
+
+    <div class="sec">Rentabilidad y volatilidad frente a ${baseName()}</div>
+    <table class="cmp"><thead><tr><th>Indicador</th><th>${isB ? 'Valor' : 'Este fondo'}</th><th>${baseName()}</th><th>Diferencia</th></tr></thead><tbody>
+      ${row('Rentabilidad último mes', d.r1m, b.r1m, 'pct')}
+      ${row('Rentabilidad últimos 6 meses', d.r6m, b.r6m, 'pct')}
+      ${row('Rentabilidad año corrido', d.rytd, b.rytd, 'pct')}
+      ${row('Rentabilidad último año', d.r1a, b.r1a, 'pct')}
+      ${row('Volatilidad último mes', d.v1m, b.v1m, 'pct', 1)}
+      ${row('Volatilidad último año', d.v1a, b.v1a, 'pct', 1)}
+      ${row('Valor del fondo (Mill COP)', d.valor, b.valor, 'mill')}
+    </tbody></table>
+
+  `;
+
+  document.getElementById('drawer').classList.add('on');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'false');
+  document.getElementById('scrim').classList.add('on');
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('on');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'true');
+  document.getElementById('scrim').classList.remove('on');
+}
+
+/* ============ csv ============ */
+function csv() {
+  const h = ['Fondo', 'Administrador/Gestor', 'Grupo de referencia', 'Valor fondo (Mill COP)', 'Rent 1 mes',
+    'Rent 6 meses', 'Rent año corrido', 'Rent 1 año', 'Vol 1 mes', 'Vol 6 meses', 'Vol año corrido', 'Vol 1 año',
+    'Comparable con ' + baseName(), 'Argumento'];
+  const q = s => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
+  const body = filtered().map(d => [d.fondo, d.admin, d.ref, d.valor, d.r1m, d.r6m, d.rytd, d.r1a,
+  d.v1m, d.v6m, d.vytd, d.v1a, d.comparable || 'POR DEFINIR', d.argumento].map(q).join(';'));
+  const blob = new Blob(['\ufeff' + [h.map(q).join(';'), ...body].join('\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'comparacion_' + baseName().toLowerCase().replace(/[^a-z0-9]+/g, '_') + '.csv';
+  a.click();
+}
+
+/* ============ init ============ */
+function refButtons() {
+  document.getElementById('refs').innerHTML = REFS.map(r =>
+    `<button class="ref" data-g="${r}" aria-pressed="${r === grupo}">
+       <b>${r}</b><small>${groupOf(r).length} fondos en el grupo</small></button>`).join('');
+  document.querySelectorAll('#refs button').forEach(b => b.onclick = () => {
+    grupo = b.dataset.g;
+    document.querySelectorAll('#refs button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.getElementById('fAdmin').value = '';
+    render();
+  });
+}
+function render() {
+  const admins = [...new Set(groupOf(grupo).map(d => d.admin))].sort((a, b) => a.localeCompare(b, 'es'));
+  const sel = document.getElementById('fAdmin'), keep = sel.value;
+  sel.innerHTML = '<option value="">Todos los administradores</option>' + admins.map(v => `<option>${v}</option>`).join('');
+  if (admins.includes(keep)) sel.value = keep;
+  rank(); table();
+}
+
+function iniciarApp() {
+  document.getElementById('corte').textContent = 'Corte ' + FONDOS[0].corte;
+  document.getElementById('q').oninput = render;
+  document.getElementById('fAdmin').onchange = () => { rank(); table(); };
+  document.getElementById('onlyComp').onchange = render;
+  document.getElementById('csv').onclick = csv;
+  refButtons();
+  document.querySelectorAll('#segPer button').forEach(b => b.onclick = () => {
+    per = b.dataset.p; sortK = rKey(per); sortDir = -1;
+    document.querySelectorAll('#segPer button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    render();
+  });
+  document.querySelectorAll('#tbl thead th').forEach(th => th.onclick = () => {
+    const k = th.dataset.k;
+    sortDir = (sortK === k) ? -sortDir : (typeof FONDOS[0][k] === 'number' ? -1 : 1);
+    sortK = k; table();
+  });
+  document.getElementById('tb').onclick = e => {
+    const tr = e.target.closest('tr'); if (tr) openFund(decodeURIComponent(tr.dataset.f));
+  };
+  document.getElementById('close').onclick = closeDrawer;
+  document.getElementById('scrim').onclick = closeDrawer;
+  document.onkeydown = e => { if (e.key === 'Escape') closeDrawer(); };
+  render();
+}
+
+</script>
